@@ -1,21 +1,56 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from "./Navbar";
+import Home from "./Home";
+import {useState} from "react";
 
 function App() {
+
+  const urlToLearnReact = "https://reactjs.org";
+  const timesLiked = 50;
+  const randomWordsArray = ["Ronald, ", "Obama, ", "Donald"];
+
+  const [name, setName] = useState("Mario");
+
+  const handleClick = () => {
+    console.log("Hello world");
+    setName("Luigi");
+  };
+  const handleClickAgain = (name) => {
+    console.log(`Hello ${name}`);
+    setName("Bowser");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
+      <Navbar />
+      <div className="content">
+        <Home />
+        <button onClick={handleClick}>Click me</button>
+        <button onClick={()=>{
+          console.log(`Hello anon`);
+        }}>Click me anon</button>
+        <button onClick={()=>{
+          handleClickAgain('Josh')
+        }}>Click me again</button>
+      <p>The name is: {name}</p>
+      </div>
+
+      <header className="App-header" style={{
+        display: "none",
+        backgroundColor: "hotpink"}}>
+        <p>{randomWordsArray}</p>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href={urlToLearnReact}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React ({timesLiked})
         </a>
 
         <div>
@@ -37,6 +72,9 @@ function App() {
         </div>
         
       </header>
+      <body>
+
+      </body>
     </div>
   );
 }
