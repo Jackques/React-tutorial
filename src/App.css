@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.blog-list {
+  background-color: lightseagreen;
+  color: darkgreen;
+  padding-top:20px;
+}
+.blog-preview {
+  padding-bottom: 20px;
+}
