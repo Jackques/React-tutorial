@@ -33,6 +33,9 @@ const Home = () => {
         setTimeout(()=>{
             fetch('http://localhost:7000/blogs')
                 .then(res => {
+                    if(!res.ok){
+                        throw Error(`Could not receive data from the resource`);
+                    }
                     return res.json();
                 })
                 .then(data => {
@@ -40,11 +43,19 @@ const Home = () => {
                     // Asynchronously set the blogs
                     setBlogs(data);
                     setIsPending(false);
+                    setError(null);
+                })
+                .catch((err)=>{
+                    console.log(err.message);
+                    setError(true);
+                    setIsPending(false);
                 })
         }, 1000)
     }, []);
 
     const [name, setName] = useState('Mario'); // this is a dependency of the effect below
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         console.log('this fires on every init & manipulation of the attached dependancies');
         console.log('name is: ', name);
@@ -54,6 +65,7 @@ const Home = () => {
     return (
         <div className="home">
             <h1>Homepage</h1>
+            { error && <div>Could not fetch data from the server.</div> }
             { isPending && <div>Loading... </div> }
             <div className="blog-preview">
                 {/*{blogs && <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}></BlogList>}*/}
