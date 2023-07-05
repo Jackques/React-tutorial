@@ -12,10 +12,11 @@ const Home = () => {
         null // since this is the defaultvalue, we cannot 'map/loop' over this value when setting the blogs initially, thus we should first check if blogs is available
     );
 
-    // const handleDelete = (id) => {
-    //     const newBlogs = blogs.filter((blog) => blog.id !== id);
-    //     setBlogs(newBlogs);
-    // }
+    const handleDelete = (id) => {
+        debugger;
+        const newBlogs = blogs.filter((blog) => blog.id !== id);
+        setBlogs(newBlogs);
+    }
 
     useEffect(() => {
         console.log('this fires on every render (i.e. init), so if i remove a blog.. i get executed again! (re-render)');
@@ -29,15 +30,18 @@ const Home = () => {
 
     useEffect(() => {
         console.log('this fires on every init & manipulation of the attached dependancies');
-        fetch('http://localhost:8000/blogs')
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                console.log('Data from JSON Server: ', data);
-                // Asynchronously set the blogs
-                setBlogs(data);
-            })
+        setTimeout(()=>{
+            fetch('http://localhost:7000/blogs')
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    console.log('Data from JSON Server: ', data);
+                    // Asynchronously set the blogs
+                    setBlogs(data);
+                    setIsPending(false);
+                })
+        }, 1000)
     }, []);
 
     const [name, setName] = useState('Mario'); // this is a dependency of the effect below
@@ -45,18 +49,20 @@ const Home = () => {
         console.log('this fires on every init & manipulation of the attached dependancies');
         console.log('name is: ', name);
     }, [name]);
+    const [isPending,setIsPending] = useState(true);
 
     return (
         <div className="home">
             <h1>Homepage</h1>
-
+            { isPending && <div>Loading... </div> }
             <div className="blog-preview">
                 {/*{blogs && <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}></BlogList>}*/}
                 {/*{blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs"*/}
                 {/*          handleDelete={handleDelete} />}*/}
 
-                {blogs && <BlogList blogs={blogs} title="All blogs"></BlogList>}
-                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs"/>}
+                {blogs && <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}></BlogList>}
+                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs" handleDelete={handleDelete}/>}
+                {!blogs && <p>No blogs here</p>}
 
             </div>
             <button onClick={()=>{setName('Luigi')}}> I change the state only for 'name' effect</button>

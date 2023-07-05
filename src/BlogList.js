@@ -1,5 +1,7 @@
 // const BlogList = (props) => {
+
 const BlogList = ({blogs, title, handleDelete}) => {
+    debugger;
     // Alternatively, I could also put the values passed above in their own local variabeles first
     // const blogs = props.blogs;
     // const title = props.title;
@@ -24,7 +26,6 @@ const BlogList = ({blogs, title, handleDelete}) => {
 
     //todo: why can i not put any HTML code before the first HTML tag of the template <div className=..
     // or after the last HTML tag of the template (</div>..)?
-
     return (
         <div className="blog-list">
             <h2>{title}</h2>
@@ -35,7 +36,7 @@ const BlogList = ({blogs, title, handleDelete}) => {
                         {blog.body}
                     </div>
                     <p>Written by {blog.author}</p>
-                    <button onClick={()=>{handleDelete(blog.id)}}>Delete blog</button>
+                    <button onClick={()=> handleDelete(blog.id)}>Delete blog</button>
                 </div>
             ))}
         </div>
