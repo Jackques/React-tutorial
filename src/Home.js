@@ -1,22 +1,19 @@
 import {useState, useEffect } from "react";
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
-    const [blogs, setBlogs] = useState(
-        //[
-        // {title: "first title", body: "Lorum ipsum...", author: "Jack", id: 1},
-        // {title: "second title", body: "Lorum ipsum...", author: "Tim", id: 2},
-        // {title: "third title", body: "Lorum ipsum...", author: "Jack", id: 3},
-        // above blogs are dummy data to test if it works correctly
-    //]
-        null // since this is the defaultvalue, we cannot 'map/loop' over this value when setting the blogs initially, thus we should first check if blogs is available
-    );
 
-    const handleDelete = (id) => {
-        debugger;
-        const newBlogs = blogs.filter((blog) => blog.id !== id);
-        setBlogs(newBlogs);
-    }
+    const { data: blogs, isPending, error } = useFetch('http://localhost:7000/blogs');
+    // data: blogs = whatever is exported into 'data' from useFetch is now going into 'blogs' INSTEAD as a local variabele
+
+    /* code below is disabled because setBlogs has now been moved to useFetch.js AND the narrator of the tutorial also removed it in his example at around video 16-18.
+       but I wanted to keep it around for the sake of having an example. */
+    // const handleDelete = (id) => {
+    //     debugger;
+    //     const newBlogs = blogs.filter((blog) => blog.id !== id);
+    //     setBlogs(newBlogs);
+    // }
 
     useEffect(() => {
         console.log('this fires on every render (i.e. init), so if i remove a blog.. i get executed again! (re-render)');
@@ -28,52 +25,25 @@ const Home = () => {
         // which would cause this 'useEffect' to be run again, and so forth
     });
 
-    useEffect(() => {
-        console.log('this fires on every init & manipulation of the attached dependancies');
-        setTimeout(()=>{
-            fetch('http://localhost:7000/blogs')
-                .then(res => {
-                    if(!res.ok){
-                        throw Error(`Could not receive data from the resource`);
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    console.log('Data from JSON Server: ', data);
-                    // Asynchronously set the blogs
-                    setBlogs(data);
-                    setIsPending(false);
-                    setError(null);
-                })
-                .catch((err)=>{
-                    console.log(err.message);
-                    setError(true);
-                    setIsPending(false);
-                })
-        }, 1000)
-    }, []);
-
     const [name, setName] = useState('Mario'); // this is a dependency of the effect below
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         console.log('this fires on every init & manipulation of the attached dependancies');
         console.log('name is: ', name);
     }, [name]);
-    const [isPending,setIsPending] = useState(true);
 
     return (
         <div className="home">
             <h1>Homepage</h1>
             { error && <div>Could not fetch data from the server.</div> }
-            { isPending && <div>Loading... </div> }
+            { isPending && <div>Loading... (1 sec delay) </div> }
             <div className="blog-preview">
                 {/*{blogs && <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}></BlogList>}*/}
-                {/*{blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs"*/}
-                {/*          handleDelete={handleDelete} />}*/}
+                {/*{blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs" handleDelete={handleDelete}/>}*/}
+                {/*{!blogs && <p>No blogs here</p>}*/}
 
-                {blogs && <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}></BlogList>}
-                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs" handleDelete={handleDelete}/>}
+                {blogs && <BlogList blogs={blogs} title="All blogs"></BlogList>}
+                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs" />}
                 {!blogs && <p>No blogs here</p>}
 
             </div>
