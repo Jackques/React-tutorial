@@ -1,5 +1,5 @@
-Last followed video: https://www.youtube.com/watch?v=aKOQtGLT-Yk&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=24
-Next up: https://www.youtube.com/watch?v=t7VmF4WsLCo&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=25
+Last followed video: https://www.youtube.com/watch?v=c-5VXl8yPQA&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=26
+Next up: https://www.youtube.com/watch?v=IkMND33x0qQ&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d&index=27
 
 ----
 # Getting Started with Create React App

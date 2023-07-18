@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 
 // ! custom hooks in React needs to start with the word "use", otherwise it will not work
+// these 'hooks' are somewhat similair to Angular services, in the way that they provide
+// some seperate logic i.e. (the same) HTTP request for a (or multiple) components.
 const useFetch = (url) => {
     const [data, setData] = useState(
         //[
