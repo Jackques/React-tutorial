@@ -1,10 +1,13 @@
 import {useState} from "react";
+import {useHistory} from "react-router-dom";
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('yoshi');
     const [isPending, setIsPending] = useState(false);
+
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,6 +24,11 @@ const Create = () => {
         }).then((rep) => {
             console.log('new blog added: ', rep.ok);
             setIsPending(true);
+            // history.go(-1);
+            // Make the browser go back to the previous page (-1) of this tab in it's history
+
+            history.push('/');
+            // Make the browser navigate to the homepage (/) of this tab and pushes a new entry (current page) onto the history stack
         })
     }
 

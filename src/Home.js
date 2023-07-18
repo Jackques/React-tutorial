@@ -43,7 +43,7 @@ const Home = () => {
                 {/*{!blogs && <p>No blogs here</p>}*/}
 
                 {blogs && <BlogList blogs={blogs} title="All blogs"></BlogList>}
-                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "Jack")} title="Jack's Blogs" />}
+                {blogs && <BlogList blogs={blogs.filter((blog) => blog.author === "jack")} title="Jack's Blogs" />}
                 {!blogs && <p>No blogs here</p>}
 
             </div>

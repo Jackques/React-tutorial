@@ -15,7 +15,7 @@
     {
       "title": "Jack's blog!",
       "body": "This is Jack's first blog...",
-      "author": "Jack",
+      "author": "jack",
       "id": 3
     },
     {
@@ -35,6 +35,12 @@
       "body": "It's me... Mario!",
       "author": "mario",
       "id": 6
+    },
+    {
+      "title": "Jack's newest blog",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dolor purus, luctus a fringilla vel, auctor dapibus dolor. Pellentesque sed ipsum quis mi vestibulum pretium. In hac habitasse platea dictumst. Fusce euismod massa ut urna sollicitudin dapibus. Cras pulvinar scelerisque libero vitae iaculis. Curabitur non massa porttitor, suscipit nibh sed, consectetur erat. Nulla facilisi. Vestibulum lobortis quam sem. Ut eget augue dui. Integer sollicitudin sem quis neque laoreet, sit amet maximus lorem malesuada. Duis id maximus est. Phasellus iaculis imperdiet metus, quis tristique metus maximus in.",
+      "author": "jack",
+      "id": 7
     }
   ]
 }
